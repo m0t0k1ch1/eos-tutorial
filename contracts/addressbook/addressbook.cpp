@@ -6,7 +6,7 @@ class [[eosio::contract]] addressbook : public contract {
 public:
   using contract::contract;
 
-  addressbook(name receiver, name code,  datastream<const char*> ds): contract(receiver, code, ds) {}
+  addressbook(name receiver, name code, datastream<const char*> ds): contract(receiver, code, ds) {}
 
   // For usability, the contract should have the ability to both create and modify a table row with a single action.
   [[eosio::action]]
