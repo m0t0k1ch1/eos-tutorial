@@ -105,6 +105,7 @@ private:
     uint64_t get_secondary_1() const { return age; }
   };
 
+  // Notify helper for sending inline transactions
   void send_summary(name user, std::string msg) {
     action(
            permission_level{get_self(), "active"_n},           // A permission_level struct
