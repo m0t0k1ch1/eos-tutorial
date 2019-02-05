@@ -10,6 +10,7 @@ public:
 
   [[eosio::action]]
   void count(name user, std::string type) {
+    // Only the addressbook account/contract can authorize this command.
     require_auth(name("addressbook"));
 
     count_index counts(_self, _self.value);
