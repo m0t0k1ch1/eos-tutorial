@@ -1,0 +1,38 @@
+{
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Thu Feb 14 12:17:31 2019",
+    "version": "eosio::abi/1.1",
+    "structs": [
+        {
+            "name": "in",
+            "base": "",
+            "fields": [
+                {
+                    "name": "user",
+                    "type": "name"
+                }
+            ]
+        }
+    ],
+    "types": [],
+    "actions": [
+        {
+            "name": "a",
+            "type": "in",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "b",
+            "type": "in",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "c",
+            "type": "in",
+            "ricardian_contract": ""
+        }
+    ],
+    "tables": [],
+    "ricardian_clauses": [],
+    "variants": [],
+    "abi_extensions": []
+}
