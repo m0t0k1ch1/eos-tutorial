@@ -1,6 +1,5 @@
 // Include the required libraries.
 #include <eosiolib/eosio.hpp> // Loads the EOSIO C and C++ API.
-#include <eosiolib/print.hpp>
 
 // Use namespace eosio.
 using namespace eosio;
