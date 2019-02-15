@@ -1,3 +1,3 @@
 # eos-tutorial
 
-contracts in https://developers.eos.io/eosio-home/docs
+sample contracts for [the tutorial of EOSIO Developer Portal](https://developers.eos.io/eosio-home/docs)
