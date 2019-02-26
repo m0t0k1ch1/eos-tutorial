@@ -2,36 +2,44 @@
 
 using namespace eosio;
 
-class test : public contract {
-public:
+class [[eosio::contract]] test : public contract
+{
   using contract::contract;
 
+public:
+
   [[eosio::action]]
-  void a(name user) {
+  void a(name user)
+  {
     require_auth(user);
     print("Hi, ", user, " from a");
   }
 
   [[eosio::action]]
-  void b(name user) {
+  void b(name user)
+  {
     require_auth(user);
     print("Hi, ", user, " from b");
   }
 
   [[eosio::action]]
-  void c(name user) {
+  void c(name user)
+  {
     require_auth(user);
     print("Hi, ", user, " from c");
   }
 
   [[eosio::action]]
-  void notify(name user, const std::string msg) {
+  void notify(name user, const std::string msg)
+  {
     print(msg);
   }
+
 };
 
 extern "C" {
-  void apply(uint64_t receiver, uint64_t code, uint64_t action) {
+  void apply(uint64_t receiver, uint64_t code, uint64_t action)
+  {
     if (code == receiver && action == name("a").value) {
       execute_action(name(receiver), name(code), &test::a);
     }

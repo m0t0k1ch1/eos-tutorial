@@ -4,15 +4,19 @@
 // Use namespace eosio.
 using namespace eosio;
 
-class hello : public contract { // The contract class needs to extend eosio::contract.
-public: // Public access specifier.
+class [[eosio::contract]] hello : public contract // The contract class needs to extend eosio::contract.
+{
   using contract::contract; // Will allow us to write more concise code.
 
+public: // Public access specifier.
+
   [[eosio::action]] // Inform the hi() action to the abi generator.
-  void hi(name user) { // Name is one of the most common typedefs.
+  void hi(name user) // Name is one of the most common typedefs.
+  {
     require_auth(user); // Check if the user executing the action matches the provided parameter.
     print("Hello, ", user);
   }
+
 };
 
 // Handle the dispatching of actions for the hello contract.

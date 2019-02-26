@@ -3,22 +3,24 @@
 using namespace eosio;
 
 class [[eosio::contract]] addressbook : public contract {
-public:
+
   using contract::contract;
 
-  addressbook(name receiver, name code, datastream<const char*> ds): contract(receiver, code, ds) {}
+public:
+
+  addressbook(name receiver, name code, datastream<const char*> ds) : contract(receiver, code, ds) {}
 
   // For usability, the contract should have the ability to both create and modify a table row with a single action.
   [[eosio::action]]
   void upsert(
-              name user,
-              std::string first_name,
-              std::string last_name,
-              uint64_t age,
-              std::string street,
-              std::string city,
-              std::string state
-              ) {
+      name user,
+      std::string first_name,
+      std::string last_name,
+      uint64_t age,
+      std::string street,
+      std::string city,
+      std::string state
+  ) {
     // The only account authorized to modify the address book is the user.
     require_auth(user);
 
@@ -31,8 +33,8 @@ public:
     auto iterator = addresses.find(user.value);
     if (iterator == addresses.end()) { // The user isn't in the table.
       // emplace method accepts two arguments,
-      // the "payer" of this record who pays the storage usage and a callback function.
-      // The callback function for the emplace method must use a lamba to create a reference.
+      // 1. the "payer" of this record who pays the storage usage and a callback function.
+      // 2. The callback function for the emplace method must use a lamba to create a reference.
       addresses.emplace(user, [&](auto& row) {
                                 row.key        = user;
                                 row.first_name = first_name;
@@ -45,11 +47,11 @@ public:
     }
     else { // The user is in the table.
       // modify method accepts three arguments:
-      // - The iterator defined earlier,
-      //   present set to the user as declared when calling this action.
-      // - The "scope" or "ram payer", which in this case is the user,
-      //   as previously decided when proposing the design for this contract.
-      // - The callback function to handle the modification of the table.
+      // 1. The iterator defined earlier,
+      //    present set to the user as declared when calling this action.
+      // 2. The "scope" or "ram payer", which in this case is the user,
+      //    as previously decided when proposing the design for this contract.
+      // 3. The callback function to handle the modification of the table.
       addresses.modify(iterator, user, [&](auto& row) {
                                          row.key        = user;
                                          row.first_name = first_name;
@@ -63,7 +65,8 @@ public:
   }
 
   [[eosio::action]]
-  void erase(name user) {
+  void erase(name user)
+  {
     require_auth(user);
     address_index addresses(_self, _self.value);
     auto iterator = addresses.find(user.value);
@@ -76,6 +79,7 @@ public:
   }
 
 private:
+
   struct [[eosio::table]] person {
     name key;
     std::string first_name;
@@ -103,6 +107,7 @@ private:
                       indexed_by<"byage"_n, const_mem_fun<person, uint64_t, &person::get_secondary_1>>
 
                       > address_index;
+
 };
 
 EOSIO_DISPATCH(addressbook, (upsert)(erase));
